@@ -11,7 +11,8 @@
     "pages/my-address/my-address",
     "pages/my-address/new-address",
     "pages/personal/personal",
-    "pages/order-details/order"
+    "pages/order-details/order",
+    "pages/class-goods/goods"
   ],
   "subPackages": [],
   "window": {
