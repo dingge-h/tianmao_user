@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 28));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
 //
 //
 //
@@ -206,6 +206,70 @@ var Price = __webpack_require__(/*! e-commerce_price */ 227);var _default =
       uni.navigateTo({
         url: '../my-address/my-address' });
 
+    },
+
+    // 提交订单
+    placeOrder: function placeOrder() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var codata, dataobj, paydata, _paydata$data, nonceStr, paySign, signType, timeStamp;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                // 商品数据
+                codata = _this.comminfo.map(function (item) {
+                  var data = {
+                    id: item.id,
+                    image: item.image,
+                    title: item.title,
+                    size: item.size,
+                    color: item.color,
+                    price: item.price,
+                    many: item.many };
+
+                  return data;
+                });
+
+                dataobj = {
+                  appid: 'wx6c4c8e3f1734291d',
+                  mchid: '1621643640',
+                  partnerKey: '58d87cef6d69ffbe6f9120dingyujian',
+                  consignee: _this.address,
+                  commodity: codata,
+                  total_price: _this.Totalprice,
+                  idcard: _this.idcard };
+
+                // 1.统一下单
+                _context.prev = 2;_context.next = 5;return (
+                  new _this.Request(_this.Urls.m().wxpay, dataobj).modepost());case 5:paydata = _context.sent;if (!(
+                paydata.msg == 'SUCCESS')) {_context.next = 11;break;}
+                // 存储商户订单号和订单id
+                _this.outno = paydata.data.out_trade_no;
+                _this.ide = paydata.data.id;_context.next = 12;break;case 11:throw (
+
+
+                  paydata.msg);case 12:_context.next = 18;break;case 14:_context.prev = 14;_context.t0 = _context["catch"](2);
+
+
+                new _this.$Toast(_context.t0, 'none').showtoast();throw _context.t0;case 18:_context.prev = 18;_paydata$data =
+
+
+
+
+                paydata.data, nonceStr = _paydata$data.nonceStr, paySign = _paydata$data.paySign, signType = _paydata$data.signType, timeStamp = _paydata$data.timeStamp;_context.next = 22;return (
+                  _this.wxPay({ nonceStr: nonceStr, paySign: paySign, signType: signType, timeStamp: timeStamp, package: paydata.data.package }));case 22:_context.next = 26;break;case 24:_context.prev = 24;_context.t1 = _context["catch"](18);case 26:case "end":return _context.stop();}}}, _callee, null, [[2, 14], [18, 24]]);}))();
+
+
+
+    },
+    // 调用支付；promise
+    wxPay: function wxPay(payment) {
+      return new Promise(function (resolve, reject) {
+        wx.requestPayment(_objectSpread(_objectSpread({},
+        payment), {}, {
+          success: function success(res) {
+            console.log(res);
+            resolve(res);
+          },
+          fail: function fail(Error) {
+            reject(Error);
+          } }));
+
+      });
     } },
 
 

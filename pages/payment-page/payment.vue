@@ -75,6 +75,70 @@
             		url:'../my-address/my-address'
             	})
             },
+            
+            // 提交订单
+            async placeOrder(){
+                // 商品数据
+                let codata = this.comminfo.map(item=>{
+                	let data = {
+                		id:item.id,
+                		image:item.image,
+                		title:item.title,
+                		size:item.size,
+                		color:item.color,
+                		price:item.price,
+                		many:item.many
+                	}
+                	return data
+                })
+                
+                let dataobj = {
+                    appid:'wx6c4c8e3f1734291d',
+                    mchid:'1621643640',
+                    partnerKey:'58d87cef6d69ffbe6f9120dingyujian',
+                	consignee:this.address,
+                	commodity:codata,
+                	total_price:this.Totalprice,
+                	idcard:this.idcard
+                }
+                // 1.统一下单
+                try{
+                    var paydata = await new this.Request(this.Urls.m().wxpay,dataobj).modepost()
+                    if(paydata.msg == 'SUCCESS'){
+                    	// 存储商户订单号和订单id
+                    	this.outno = paydata.data.out_trade_no
+                    	this.ide = paydata.data.id
+                    }else{
+                    	// 如果出现throw关键词就会进入catch里面
+                    	throw paydata.msg
+                    }
+                }catch(e){
+                    new this.$Toast(e,'none').showtoast()
+                    throw e
+                }
+                // 2.发起微信支付
+                try{
+                    let {nonceStr,paySign,signType,timeStamp} = paydata.data
+                    await this.wxPay({nonceStr,paySign,signType,timeStamp,package:paydata.data.package})
+                }catch(e){
+                    //TODO handle the exception
+                }
+            },
+            // 调用支付；promise
+            wxPay(payment){
+            	return new Promise((resolve,reject)=>{
+            		wx.requestPayment({
+            			...payment,
+            			success:res=>{
+                            console.log(res)
+            				resolve(res)
+            			},
+            			fail:Error=>{
+            				reject(Error)
+            			}
+            		})
+            	})
+            }
         },
 
         onLoad(e) {
