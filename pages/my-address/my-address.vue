@@ -1,19 +1,19 @@
 <template>
     <view>
-        <!-- <block v-for="(item,index) in adddata" :key="index"> -->
+        <block v-for="(item,index) in adddata" :key="index">
             <view class="my-address-view">
-             	  <view class="my-address-name" @click="getAdd(item)">
-            		      <text>湖北省荆州市</text>
-                    <view class="my-address-adding">
-                        <text>张三</text>
-                        <text>15826574314</text>
-                    </view>
-                </view>
-                <view class="my-address-change" @click="chAnge('001',item)">
-                    <image src="/static/loading/genggai.svg" mode="widthFix"></image>
+            	<view class="my-address-name" @click="getAdd(item)">
+            		<text>{{item.address}}</text>
+            		<view class="my-address-adding">
+            			<text>{{item.name}}</text>
+            			<text>{{item.mobile}}</text>
+            		</view>
+            	</view>
+            	<view class="my-address-change" @click="chAnge('001',item)">
+            		<image src="/static/loading/genggai.svg" mode="widthFix"></image>
             	</view>
             </view>
-        <!-- </block> -->
+        </block>
         <!-- 新增收货地址 -->
         <view class="button-address" @click="chAnge('002')">
             <image src="/static/loading/xinzeng.svg" mode="widthFix"></image>
@@ -39,7 +39,51 @@
             }
         },
         methods: {
-
+            // 获取收货地址
+            async getadd(){
+                try{
+                    let data = await new this.Request(this.Urls.m().gainadd).modeget()
+                    if(data.msg.errcode){
+                    	// 需要登录
+                    	this.$refs.loginmen.showing()
+                    }else if(data.data.length === 0){
+                    	this.searchno = true
+                    }else{
+                    	this.searchno = false
+                    	this.adddata = data.data
+                    }
+                }catch(e){
+                    //TODO handle the exception
+                }
+            },
+            
+            // 新增收货地址
+            chAnge(value='002',data=[]){
+            	let obj = {value,data}
+            	let str = JSON.stringify(obj)
+            	uni.navigateTo({
+            		url:'./new-address?value=' + str
+            	})
+            },
+            // 选中某个收货地址携带数据返回上一级订单页面
+            getAdd(item){
+            	this.$store.commit('mutaadd',item)
+            	uni.navigateBack({
+            	    delta: 1
+            	});
+            }
+        },
+        
+        onShow() {
+            this.getadd()
+        },
+        
+        mounted() {
+        	this.$bus.$on('mycart',res=>{
+        		if(res.cart == 'SUCCESS'){
+        			this.getadd()
+        		}
+        	})
         }
     }
 </script>

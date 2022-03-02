@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 28));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
 //
 //
 //
@@ -170,7 +170,54 @@ var _default =
       searchno: false };
 
   },
-  methods: {} };exports.default = _default;
+  methods: {
+    // 获取收货地址
+    getadd: function getadd() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.prev = 0;_context.next = 3;return (
+
+                  new _this.Request(_this.Urls.m().gainadd).modeget());case 3:data = _context.sent;
+                if (data.msg.errcode) {
+                  // 需要登录
+                  _this.$refs.loginmen.showing();
+                } else if (data.data.length === 0) {
+                  _this.searchno = true;
+                } else {
+                  _this.searchno = false;
+                  _this.adddata = data.data;
+                }_context.next = 9;break;case 7:_context.prev = 7;_context.t0 = _context["catch"](0);case 9:case "end":return _context.stop();}}}, _callee, null, [[0, 7]]);}))();
+
+
+
+    },
+
+    // 新增收货地址
+    chAnge: function chAnge() {var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '002';var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+      var obj = { value: value, data: data };
+      var str = JSON.stringify(obj);
+      uni.navigateTo({
+        url: './new-address?value=' + str });
+
+    },
+    // 选中某个收货地址携带数据返回上一级订单页面
+    getAdd: function getAdd(item) {
+      this.$store.commit('mutaadd', item);
+      uni.navigateBack({
+        delta: 1 });
+
+    } },
+
+
+  onShow: function onShow() {
+    this.getadd();
+  },
+
+  mounted: function mounted() {var _this2 = this;
+    this.$bus.$on('mycart', function (res) {
+      if (res.cart == 'SUCCESS') {
+        _this2.getadd();
+      }
+    });
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
