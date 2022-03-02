@@ -134,7 +134,6 @@
             },
             // 加入购物车
             async detErmine() {
-                log('加入购物车')
                 let {image,price} = this.attribute
                 let data = {
                     id: this.id,

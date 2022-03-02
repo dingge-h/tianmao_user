@@ -266,8 +266,7 @@ console,log = _console.log;var _default =
       this.many++;
     },
     // 加入购物车
-    detErmine: function detErmine() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _this$attribute, image, price, data, atcartdata, mycart;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-                log('加入购物车');_this$attribute =
+    detErmine: function detErmine() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _this$attribute, image, price, data, atcartdata, mycart;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_this$attribute =
                 _this.attribute, image = _this$attribute.image, price = _this$attribute.price;
                 data = {
                   id: _this.id,
@@ -276,23 +275,23 @@ console,log = _console.log;var _default =
                   image: image,
                   price: price,
                   title: _this.title,
-                  many: _this.many };_context.prev = 3;_context.next = 6;return (
+                  many: _this.many };_context.prev = 2;_context.next = 5;return (
 
 
-                  new _this.Request(_this.Urls.m().atcart, data).modepost());case 6:atcartdata = _context.sent;if (!
-                atcartdata.msg.errcode) {_context.next = 11;break;}
+                  new _this.Request(_this.Urls.m().atcart, data).modepost());case 5:atcartdata = _context.sent;if (!
+                atcartdata.msg.errcode) {_context.next = 10;break;}
                 // 需要登录
-                _this.$refs.show.showing('coll');_context.next = 18;break;case 11:if (!(
-                atcartdata.msg == 'SUCCESS')) {_context.next = 18;break;}
+                _this.$refs.show.showing('coll');_context.next = 17;break;case 10:if (!(
+                atcartdata.msg == 'SUCCESS')) {_context.next = 17;break;}
                 _this.hideCou();
                 new _this.$Toast('加入购物车成功').showtoast();
                 // 获取购物车的件数
-                _context.next = 16;return new _this.Request(_this.Urls.m().mycart).modeget();case 16:mycart = _context.sent;
+                _context.next = 15;return new _this.Request(_this.Urls.m().mycart).modeget();case 15:mycart = _context.sent;
                 // vuex
-                _this.$store.commit('mutacart', mycart.data.length);case 18:_context.next = 23;break;case 20:_context.prev = 20;_context.t0 = _context["catch"](3);
+                _this.$store.commit('mutacart', mycart.data.length);case 17:_context.next = 22;break;case 19:_context.prev = 19;_context.t0 = _context["catch"](2);
 
 
-                log(_context.t0);case 23:case "end":return _context.stop();}}}, _callee, null, [[3, 20]]);}))();
+                log(_context.t0);case 22:case "end":return _context.stop();}}}, _callee, null, [[2, 19]]);}))();
 
 
     },

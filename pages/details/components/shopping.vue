@@ -102,7 +102,11 @@
                 }else if(newValue.msg == 'SUCCESS'){
                     this.cartnum = newValue.data.length
                 }
-            },
+            }, 
+            // 加入购物车成功实时更新购物车件数
+            "$store.state.cartnum"(newValue,oldValue){
+            	this.cartnum = newValue.nums
+            }
         }
     }
 </script>
