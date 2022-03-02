@@ -53,9 +53,9 @@
             </view>
         </view>
         <!-- 确定 -->
-        <view class="determine coup-anim" v-if="mean == '001' " @click="skumen.ban && modifySku()">确定</view>
-        <view class="determine coup-anim" v-if="mean == '002' " @click="skumen.ban && detErmine()">确定</view>
-        <view class="determine coup-anim" v-if="mean == '003' " @click="skumen.ban && purChase()">确定</view>
+        <view class="determine coup-anim" v-if="mean == '001' " @click="skumen.ban && modifySku()">重选sku</view>
+        <view class="determine coup-anim" v-if="mean == '002' " @click="skumen.ban && detErmine()">加入购物车</view>
+        <view class="determine coup-anim" v-if="mean == '003' " @click="skumen.ban && purChase()">立即购买</view>
         <!-- 登录弹窗 -->
         <showmodal ref="show"></showmodal>
     </view>
