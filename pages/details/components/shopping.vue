@@ -65,6 +65,9 @@
                     // 获取商品是否收藏
                     let collection = await new this.Request(this.Urls.m().collection + '?id=' + this.gooid).modeget()
                     this.collects = collection.msg.collects
+                    // 更新购物车件数
+                    let mycart = await new this.Request(this.Urls.m().mycart).modeget()
+                    this.cartnum = mycart.data.length
                 }catch(e){
                     //TODO handle the exception
                 }
@@ -86,6 +89,14 @@
             colldata(newValue,oldValue){
             	let {collects} = newValue.msg
             	this.collects = collects
+            },
+            // 获取购物车件数
+            cartdata(newValue,oldValue){
+            	if(newValue.msg.errcode){
+                    this.cartnum = 0
+                }else if(newValue.msg == 'SUCCESS'){
+                    this.cartnum = newValue.data.length
+                }
             },
         }
     }

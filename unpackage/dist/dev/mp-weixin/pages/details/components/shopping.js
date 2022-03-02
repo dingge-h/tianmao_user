@@ -176,11 +176,14 @@ console,log = _console.log;var _default =
     },
 
     // 登陆成功后更新收藏状态
-    reFresh: function reFresh() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var collection;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.prev = 0;_context2.next = 3;return (
+    reFresh: function reFresh() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var collection, mycart;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.prev = 0;_context2.next = 3;return (
 
 
                   new _this2.Request(_this2.Urls.m().collection + '?id=' + _this2.gooid).modeget());case 3:collection = _context2.sent;
-                _this2.collects = collection.msg.collects;_context2.next = 9;break;case 7:_context2.prev = 7;_context2.t0 = _context2["catch"](0);case 9:case "end":return _context2.stop();}}}, _callee2, null, [[0, 7]]);}))();
+                _this2.collects = collection.msg.collects;
+                // 更新购物车件数
+                _context2.next = 7;return new _this2.Request(_this2.Urls.m().mycart).modeget();case 7:mycart = _context2.sent;
+                _this2.cartnum = mycart.data.length;_context2.next = 13;break;case 11:_context2.prev = 11;_context2.t0 = _context2["catch"](0);case 13:case "end":return _context2.stop();}}}, _callee2, null, [[0, 11]]);}))();
 
 
 
@@ -202,6 +205,14 @@ console,log = _console.log;var _default =
     colldata: function colldata(newValue, oldValue) {var
       collects = newValue.msg.collects;
       this.collects = collects;
+    },
+    // 获取购物车件数
+    cartdata: function cartdata(newValue, oldValue) {
+      if (newValue.msg.errcode) {
+        this.cartnum = 0;
+      } else if (newValue.msg == 'SUCCESS') {
+        this.cartnum = newValue.data.length;
+      }
     } } };exports.default = _default;
 
 /***/ }),
