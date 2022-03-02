@@ -40,6 +40,7 @@
 
 <script>
     import '../../../style/order.css'
+    const {Payment} = require('../../../public/payment.js')
     export default {
         data() {
         	return {
@@ -73,7 +74,31 @@
             		url:'../order-details/order?value=' + value
             	})
             },
+            // 再次付款
+            payMent(obj){
+                new this.$Toast('正在下单').showloading()
+                new Payment(obj).paySucc()
+                .then(res=>{
+                	this.Tobepaid()
+                	new this.$Toast('支付成功').showtoast()
+                })
+                .catch(err=>{
+                	new this.$Toast('支付失败','none').showtoast()
+                })
+            },
             
+            // 删除订单
+            async deteOrder(id){
+            	try{
+            		let data = await new this.Request(this.Urls.m().deleorder + '?orderid=' + id).modeget()
+            		if(data.msg == 'SUCCESS'){
+            			this.Tobepaid()
+            			new this.$Toast('删除成功').showtoast()
+            		}
+            	}catch(e){
+            		//TODO handle the exception
+            	}
+            }
         },
         
         created() {

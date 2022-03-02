@@ -83,6 +83,45 @@
             		}
             	}
             },
+            
+            // 付款，确认收货，评价
+            conFirm(text){
+            	if(text == '付款'){
+            		new this.$Toast('正在下单').showloading()
+            		new Payment(this.orderdata[0]).paySucc()
+            		.then(res=>{
+            			new this.$Toast('支付成功').showtoast()
+            			uni.redirectTo({
+            			    url: '../personal/personal'
+            			});
+            		})
+            		.catch(err=>{
+            			new this.$Toast('支付失败','none').showtoast()
+            		})
+            	}else if(text == '确认收货'){
+            		this.conRece()
+            	}else if(text == '去评价'){
+            		let {_id,id,size,color} = this.orderdata[0].order[0]
+            		let data = JSON.stringify({_id,id,size,color})
+            		wx.navigateTo({
+            			url:'../order-details/pu-coments?data=' + data
+            		})
+            	}
+            },
+            // 确认收货
+            async conRece(){
+            	try{
+            		let data = await new this.Request(this.Urls.m().conreceipt + '?id=' + this.values.id).modeget()
+            		if(data.msg == 'SUCCESS'){
+            			new this.$Toast('确认收货成功').showtoast()
+            			uni.redirectTo({
+            			    url: '../personal/personal'
+            			});
+            		}
+            	}catch(e){
+            		//TODO handle the exception
+            	}
+            }
         },
 
         onLoad(e) {

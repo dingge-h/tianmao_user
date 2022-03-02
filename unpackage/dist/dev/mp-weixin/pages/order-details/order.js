@@ -146,7 +146,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 28));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 28));
 
 
 
@@ -230,6 +230,45 @@ __webpack_require__(/*! ../../style/order-details.css */ 286);function _interopR
 
 
 
+    },
+
+    // 付款，确认收货，评价
+    conFirm: function conFirm(text) {var _this2 = this;
+      if (text == '付款') {
+        new this.$Toast('正在下单').showloading();
+        new Payment(this.orderdata[0]).paySucc().
+        then(function (res) {
+          new _this2.$Toast('支付成功').showtoast();
+          uni.redirectTo({
+            url: '../personal/personal' });
+
+        }).
+        catch(function (err) {
+          new _this2.$Toast('支付失败', 'none').showtoast();
+        });
+      } else if (text == '确认收货') {
+        this.conRece();
+      } else if (text == '去评价') {var _this$orderdata$0$ord =
+        this.orderdata[0].order[0],_id = _this$orderdata$0$ord._id,id = _this$orderdata$0$ord.id,size = _this$orderdata$0$ord.size,color = _this$orderdata$0$ord.color;
+        var data = JSON.stringify({ _id: _id, id: id, size: size, color: color });
+        wx.navigateTo({
+          url: '../order-details/pu-coments?data=' + data });
+
+      }
+    },
+    // 确认收货
+    conRece: function conRece() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.prev = 0;_context2.next = 3;return (
+
+                  new _this3.Request(_this3.Urls.m().conreceipt + '?id=' + _this3.values.id).modeget());case 3:data = _context2.sent;
+                if (data.msg == 'SUCCESS') {
+                  new _this3.$Toast('确认收货成功').showtoast();
+                  uni.redirectTo({
+                    url: '../personal/personal' });
+
+                }_context2.next = 9;break;case 7:_context2.prev = 7;_context2.t0 = _context2["catch"](0);case 9:case "end":return _context2.stop();}}}, _callee2, null, [[0, 7]]);}))();
+
+
+
     } },
 
 
@@ -238,6 +277,7 @@ __webpack_require__(/*! ../../style/order-details.css */ 286);function _interopR
     this.values = value;
     this.tobeDetail(value.id, value.evt);
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

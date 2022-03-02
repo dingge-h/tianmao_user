@@ -164,7 +164,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-__webpack_require__(/*! ../../../style/order.css */ 278);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+__webpack_require__(/*! ../../../style/order.css */ 278);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _require =
+__webpack_require__(/*! ../../../public/payment.js */ 288),Payment = _require.Payment;var _default =
 {
   data: function data() {
     return {
@@ -197,18 +198,42 @@ __webpack_require__(/*! ../../../style/order.css */ 278);function _interopRequir
       uni.navigateTo({
         url: '../order-details/order?value=' + value });
 
-    } },
+    },
+    // 再次付款
+    payMent: function payMent(obj) {var _this2 = this;
+      new this.$Toast('正在下单').showloading();
+      new Payment(obj).paySucc().
+      then(function (res) {
+        _this2.Tobepaid();
+        new _this2.$Toast('支付成功').showtoast();
+      }).
+      catch(function (err) {
+        new _this2.$Toast('支付失败', 'none').showtoast();
+      });
+    },
 
+    // 删除订单
+    deteOrder: function deteOrder(id) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.prev = 0;_context2.next = 3;return (
+
+                  new _this3.Request(_this3.Urls.m().deleorder + '?orderid=' + id).modeget());case 3:data = _context2.sent;
+                if (data.msg == 'SUCCESS') {
+                  _this3.Tobepaid();
+                  new _this3.$Toast('删除成功').showtoast();
+                }_context2.next = 9;break;case 7:_context2.prev = 7;_context2.t0 = _context2["catch"](0);case 9:case "end":return _context2.stop();}}}, _callee2, null, [[0, 7]]);}))();
+
+
+
+    } },
 
 
   created: function created() {
     this.Tobepaid();
   },
   // 小程序的生命周期在子组件不会执行
-  mounted: function mounted() {var _this2 = this;
+  mounted: function mounted() {var _this4 = this;
     this.$bus.$on('mycart', function (res) {
       if (res.cart == 'SUCCESS') {
-        _this2.Tobepaid();
+        _this4.Tobepaid();
       }
     });
   } };exports.default = _default;

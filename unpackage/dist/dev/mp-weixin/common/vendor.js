@@ -4171,6 +4171,69 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 29);
 
 /***/ }),
 
+/***/ 288:
+/*!******************************************!*\
+  !*** D:/天猫小程序/tianmao/public/payment.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 28));var _api = _interopRequireDefault(__webpack_require__(/*! ../api/api.js */ 14));
+var _request = _interopRequireDefault(__webpack_require__(/*! ../api/request.js */ 13));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}
+// 待付款
+var Payment = /*#__PURE__*/function () {
+  function Payment(payment) {_classCallCheck(this, Payment);
+    this.payment = payment;
+  }
+  // 1.拉起付款
+  _createClass(Payment, [{ key: "paySucc", value: function () {var _paySucc = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var Chaxun, querydata;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.prev = 0;_context.next = 3;return (
+
+
+                  this.wxPay());case 3:_context.next = 8;break;case 5:_context.prev = 5;_context.t0 = _context["catch"](0);throw _context.t0;case 8:
+
+
+
+                // 查询订单状态
+                Chaxun = {
+                  appid: "wx6c4c8e3f1734291d",
+                  mchid: "1621643640",
+                  partnerKey: "58d87cef6d69ffbe6f9120dingyujian",
+                  id: this.payment._id,
+                  outno: this.payment.out_trade_no };_context.prev = 9;_context.next = 12;return (
+
+
+                  new _api.default(_request.default.m().queryorder, Chaxun).modepost());case 12:querydata = _context.sent;return _context.abrupt("return",
+                querydata);case 16:_context.prev = 16;_context.t1 = _context["catch"](9);throw (
+
+                  '支付失败');case 19:case "end":return _context.stop();}}}, _callee, this, [[0, 5], [9, 16]]);}));function paySucc() {return _paySucc.apply(this, arguments);}return paySucc;}()
+
+
+
+    // 调用支付
+  }, { key: "wxPay", value: function wxPay() {var _this = this;
+      return new Promise(function (resolve, reject) {
+        wx.requestPayment({
+          timeStamp: _this.payment.timeStamp,
+          nonceStr: _this.payment.nonceStr,
+          package: _this.payment.package,
+          signType: _this.payment.signType,
+          paySign: _this.payment.paySign,
+          success: function success(res) {
+            resolve(res);
+          },
+          fail: function fail(Error) {
+            reject(Error);
+          } });
+
+      });
+    } }]);return Payment;}();
+
+
+module.exports = { Payment: Payment };
+
+/***/ }),
+
 /***/ 29:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!

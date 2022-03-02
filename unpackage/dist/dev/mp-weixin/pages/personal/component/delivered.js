@@ -109,12 +109,95 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!D:/天猫小程序/tianmao/pages/personal/component/delivered.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-//
-//
-//
-//
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 28));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+__webpack_require__(/*! ../../../style/order.css */ 278);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+{
+  data: function data() {
+    return {
+      tobepaid: [] };
+
+  },
+  methods: {
+    Tobepaid: function Tobepaid() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.prev = 0;_context.next = 3;return (
+
+                  new _this.Request(_this.Urls.m().tbdelivered).modeget());case 3:data = _context.sent;
+                if (data.msg.errcode) {
+                  _this.$refs.loginmen.showing();
+                } else if (data.msg == 'SUCCESS') {
+                  if (data.data.length == 0) {
+                    _this.tobepaid = [];
+                    _this.$refs.orderload.init();
+                  } else {
+                    _this.tobepaid = data.data;
+                  }
+                }_context.next = 9;break;case 7:_context.prev = 7;_context.t0 = _context["catch"](0);case 9:case "end":return _context.stop();}}}, _callee, null, [[0, 7]]);}))();
+
+
+
+    },
+    // 订单详情页
+    payDetail: function payDetail(id) {
+      var tip = {
+        tips: '买家已付款',
+        sum: '实付款',
+        show: false,
+        text: '付款',
+        id: id };
+
+      var value = JSON.stringify(tip);
+      uni.navigateTo({
+        url: '../order-details/order?value=' + value });
+
+    } },
+
+  created: function created() {
+    this.Tobepaid();
+  },
+  mounted: function mounted() {var _this2 = this;
+    this.$bus.$on('mycart', function (res) {
+      if (res.cart == 'SUCCESS') {
+        _this2.Tobepaid();
+      }
+    });
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 
