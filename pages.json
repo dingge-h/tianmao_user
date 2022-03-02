@@ -51,6 +51,18 @@
         	"style": {
         		"navigationBarTitleText": "提交订单"
         	}
+        },
+        {
+        	"path": "pages/my-address/my-address",
+        	"style": {
+        		"navigationBarTitleText": "我的收货地址"
+        	}
+        },
+        {
+        	"path": "pages/my-address/new-address",
+        	"style": {
+        		"navigationBarTitleText": "新增收货地址"
+        	}
         }
     ],
 	"globalStyle": {

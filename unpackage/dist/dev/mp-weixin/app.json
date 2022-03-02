@@ -7,7 +7,9 @@
     "pages/details/details",
     "pages/comments/comments",
     "pages/search/search",
-    "pages/payment-page/payment"
+    "pages/payment-page/payment",
+    "pages/my-address/my-address",
+    "pages/my-address/new-address"
   ],
   "subPackages": [],
   "window": {
