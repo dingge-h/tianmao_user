@@ -204,10 +204,9 @@ var _default =
     sortRequest: function sortRequest() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var comclassdata;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.prev = 0;_context.next = 3;return (
 
                   new _this.Request(_this.Urls.m().comclassurl).modeget());case 3:comclassdata = _context.sent;
-                console.log(comclassdata);
                 _this.comclassdata = comclassdata.data;
                 // 进入页面默认请求选中的分类下的商品
-                _this.seCond(comclassdata.data[0].cid);_context.next = 11;break;case 9:_context.prev = 9;_context.t0 = _context["catch"](0);case 11:case "end":return _context.stop();}}}, _callee, null, [[0, 9]]);}))();
+                _this.seCond(comclassdata.data[0].cid);_context.next = 10;break;case 8:_context.prev = 8;_context.t0 = _context["catch"](0);case 10:case "end":return _context.stop();}}}, _callee, null, [[0, 8]]);}))();
 
 
 

@@ -43,7 +43,6 @@
             async sortRequest() {
                 try {
                     let comclassdata = await new this.Request(this.Urls.m().comclassurl).modeget()
-                    console.log(comclassdata)
                     this.comclassdata = comclassdata.data
                     // 进入页面默认请求选中的分类下的商品
                     this.seCond(comclassdata.data[0].cid)

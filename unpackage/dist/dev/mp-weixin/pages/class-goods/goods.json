@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "分类商品",
-  "usingComponents": {}
+  "usingComponents": {
+    "commodity": "/pages/components/commodity"
+  }
 }
