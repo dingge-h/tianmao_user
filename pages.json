@@ -63,6 +63,12 @@
         	"style": {
         		"navigationBarTitleText": "新增收货地址"
         	}
+        },
+        {
+        	"path": "pages/personal/personal",
+        	"style": {
+        		"navigationBarTitleText": "订单中心"
+        	}
         }
     ],
 	"globalStyle": {
