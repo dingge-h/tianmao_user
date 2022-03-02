@@ -80,8 +80,14 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   if (!_vm._isMounted) {
-    _vm.e0 = function($event) {
-      !_vm.item.expire && _vm.payDetail(_vm.item._id)
+    _vm.e0 = function($event, item) {
+      var _temp = arguments[arguments.length - 1].currentTarget.dataset,
+        _temp2 = _temp.eventParams || _temp["event-params"],
+        item = _temp2.item
+
+      var _temp, _temp2
+
+      !item.expire && _vm.payDetail(item._id)
     }
   }
 }
@@ -117,6 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 28));
 
 
 
@@ -157,8 +164,45 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+__webpack_require__(/*! ../../../style/order.css */ 278);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+{
+  data: function data() {
+    return {
+      tobepaid: [] };
 
-__webpack_require__(/*! ../../../style/order.css */ 278);
+  },
+  methods: {
+    // 获取待付款数据
+    Tobepaid: function Tobepaid() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.prev = 0;_context.next = 3;return (
+
+                  new _this.Request(_this.Urls.m().tobepaid).modeget());case 3:data = _context.sent;
+                if (data.msg.errcode) {
+                  _this.$refs.loginmen.showing();
+                } else if (data.msg == 'SUCCESS') {
+                  if (data.data.length == 0) {
+                    _this.tobepaid = [];
+                    _this.$refs.orderload.init();
+                  } else {
+                    _this.tobepaid = data.data;
+                  }
+                }_context.next = 9;break;case 7:_context.prev = 7;_context.t0 = _context["catch"](0);case 9:case "end":return _context.stop();}}}, _callee, null, [[0, 7]]);}))();
+
+
+
+    } },
+
+
+  created: function created() {
+    this.Tobepaid();
+  },
+  // 小程序的生命周期在子组件不会执行
+  mounted: function mounted() {var _this2 = this;
+    this.$bus.$on('mycart', function (res) {
+      if (res.cart == 'SUCCESS') {
+        _this2.Tobepaid();
+      }
+    });
+  } };exports.default = _default;
 
 /***/ })
 
