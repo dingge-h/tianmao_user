@@ -4107,6 +4107,33 @@ module.exports = g;
 
 /***/ }),
 
+/***/ 227:
+/*!***************************************************************************************!*\
+  !*** D:/天猫小程序/tianmao/node_modules/_e-commerce_price@1.0.3@e-commerce_price/index.js ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+var Price = function Price(price) {
+  var num = parseFloat(price.toFixed(10));
+  var s = num.toString();
+  var rs = s.indexOf('.');
+
+  // 没有小数点时：
+  if (rs < 0) {
+    rs = s.length;
+    s += '.';
+  }
+  while (s.length <= rs + 2) {
+    s += '0';
+  }
+  return s;
+};
+
+module.exports = Price;
+
+/***/ }),
+
 /***/ 28:
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!

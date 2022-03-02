@@ -19,37 +19,39 @@
             </view>
             <!-- 商品详情 -->
             <view class="payment-commodity">
-                <!-- <block v-for="(item,index) in comminfo" :key="index"> -->
+                <block v-for="(item,index) in comminfo" :key="index">
                     <view class="payment-order">
-                        <view class="payment-order-img">
-                            <image src="http://h.thexxdd.cn/tianmao/public%5Cuploads%5C1603102805188-9447673.jpg" mode="aspectFill"></image>
-                        </view>
-                        <view class="payment-title">
-                            <text>标题</text>
-                            <text class="text-you">颜色:黑色;尺码:S</text>
-                        </view>
-                        <view class="payment-flex">
-                            <view class="payment-price">
-                                <text>￥ 100</text>
-                                <text class="text-you">x1</text>
-                            </view>
-                            <view>
-                                共1件 小计: ￥ 100
-                            </view>
-                        </view>
+                    	<view class="payment-order-img">
+                    		<image :src="item.image" mode="aspectFill"></image>
+                    	</view>
+                    	<view class="payment-title">
+                    		<text>{{item.title}}</text>
+                    		<text class="text-you">颜色:{{item.color}};尺码:{{item.size}}</text>
+                    	</view>
+                    	<view class="payment-flex">
+                    		<view class="payment-price">
+                    			<text>￥ {{item.price}}</text>
+                    			<text class="text-you">x{{item.many}}</text>
+                    		</view>
+                    		<view>
+                    			共{{item.many}}件 小计: ￥ {{item.total_price}}
+                    		</view>
+                    	</view>
                     </view>
-                <!-- </block> -->
+                </block>
             </view>
         </view>
         <!-- 底部提交订单 -->
         <view class="place-order">
-            <text>合计: ￥ 100</text>
+            <text>合计: ￥ {{Totalprice}}</text>
             <text @click="placeOrder()">提交订单</text>
         </view>
     </view>
 </template>
 
 <script>
+    // 价格补零
+    const Price = require('e-commerce_price')
     export default {
         data() {
             return {
@@ -67,7 +69,17 @@
         },
 
         onLoad(e) {
-            console.log(JSON.parse(e.cartdata))
+            this.comminfo = JSON.parse(e.cartdata)
+            // 合计支付总价计算
+            let numdata = 0
+            JSON.parse(e.cartdata).forEach(item=>{
+            	numdata += item.total_price
+            })
+            // 合计总价
+            this.Totalprice = Price(numdata)
+            // filter:过滤，筛选
+            let _id = JSON.parse(e.cartdata).filter(item=>item._id)
+            this.idcard = _id.map(item=>item._id)
         },
     }
 </script>

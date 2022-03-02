@@ -181,7 +181,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
-var _default =
+
+// 价格补零
+var Price = __webpack_require__(/*! e-commerce_price */ 227);var _default =
 {
   data: function data() {
     return {
@@ -199,7 +201,17 @@ var _default =
   },
 
   onLoad: function onLoad(e) {
-    console.log(JSON.parse(e.cartdata));
+    this.comminfo = JSON.parse(e.cartdata);
+    // 合计支付总价计算
+    var numdata = 0;
+    JSON.parse(e.cartdata).forEach(function (item) {
+      numdata += item.total_price;
+    });
+    // 合计总价
+    this.Totalprice = Price(numdata);
+    // filter:过滤，筛选
+    var _id = JSON.parse(e.cartdata).filter(function (item) {return item._id;});
+    this.idcard = _id.map(function (item) {return item._id;});
   } };exports.default = _default;
 
 /***/ }),
