@@ -78,6 +78,7 @@
             
             // 提交订单
             async placeOrder(){
+                new this.$Toast('正在下单').showloading()
                 // 商品数据
                 let codata = this.comminfo.map(item=>{
                 	let data = {
@@ -121,7 +122,29 @@
                     let {nonceStr,paySign,signType,timeStamp} = paydata.data
                     await this.wxPay({nonceStr,paySign,signType,timeStamp,package:paydata.data.package})
                 }catch(e){
-                    //TODO handle the exception
+                    new this.$Toast('支付失败','none').showtoast()
+                    wx.redirectTo({
+                    	url:'../personal/personal?index=' + 0
+                    })
+                }
+                // 3.查询订单是否支付成功
+                let chaxunPay = {
+                    appid:'wx6c4c8e3f1734291d',
+                    mchid:'1621643640',
+                    partnerKey:'58d87cef6d69ffbe6f9120dingyujian',
+                    outno:this.outno,
+                    id:this.ide
+                }
+                try{
+                    let querydata = await new this.Request(this.Urls.m().queryorder,chaxunPay).modepost()
+                    if(querydata.msg == 'SUCCESS'){
+                    	new this.$Toast('支付成功').showtoast()
+                    	wx.redirectTo({
+                    		url:'../personal/personal?index=' + 1
+                    	})
+                    }
+                }catch(e){
+                    new this.$Toast(e,'none').showtoast()
                 }
             },
             // 调用支付；promise
@@ -130,7 +153,6 @@
             		wx.requestPayment({
             			...payment,
             			success:res=>{
-                            console.log(res)
             				resolve(res)
             			},
             			fail:Error=>{

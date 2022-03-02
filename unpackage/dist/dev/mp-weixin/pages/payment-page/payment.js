@@ -209,7 +209,8 @@ var Price = __webpack_require__(/*! e-commerce_price */ 227);var _default =
     },
 
     // 提交订单
-    placeOrder: function placeOrder() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var codata, dataobj, paydata, _paydata$data, nonceStr, paySign, signType, timeStamp;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+    placeOrder: function placeOrder() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var codata, dataobj, paydata, _paydata$data, nonceStr, paySign, signType, timeStamp, chaxunPay, querydata;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                new _this.$Toast('正在下单').showloading();
                 // 商品数据
                 codata = _this.comminfo.map(function (item) {
                   var data = {
@@ -234,26 +235,48 @@ var Price = __webpack_require__(/*! e-commerce_price */ 227);var _default =
                   idcard: _this.idcard };
 
                 // 1.统一下单
-                _context.prev = 2;_context.next = 5;return (
-                  new _this.Request(_this.Urls.m().wxpay, dataobj).modepost());case 5:paydata = _context.sent;if (!(
-                paydata.msg == 'SUCCESS')) {_context.next = 11;break;}
+                _context.prev = 3;_context.next = 6;return (
+                  new _this.Request(_this.Urls.m().wxpay, dataobj).modepost());case 6:paydata = _context.sent;if (!(
+                paydata.msg == 'SUCCESS')) {_context.next = 12;break;}
                 // 存储商户订单号和订单id
                 _this.outno = paydata.data.out_trade_no;
-                _this.ide = paydata.data.id;_context.next = 12;break;case 11:throw (
+                _this.ide = paydata.data.id;_context.next = 13;break;case 12:throw (
 
 
-                  paydata.msg);case 12:_context.next = 18;break;case 14:_context.prev = 14;_context.t0 = _context["catch"](2);
+                  paydata.msg);case 13:_context.next = 19;break;case 15:_context.prev = 15;_context.t0 = _context["catch"](3);
 
 
-                new _this.$Toast(_context.t0, 'none').showtoast();throw _context.t0;case 18:_context.prev = 18;_paydata$data =
+                new _this.$Toast(_context.t0, 'none').showtoast();throw _context.t0;case 19:_context.prev = 19;_paydata$data =
 
 
 
 
-                paydata.data, nonceStr = _paydata$data.nonceStr, paySign = _paydata$data.paySign, signType = _paydata$data.signType, timeStamp = _paydata$data.timeStamp;_context.next = 22;return (
-                  _this.wxPay({ nonceStr: nonceStr, paySign: paySign, signType: signType, timeStamp: timeStamp, package: paydata.data.package }));case 22:_context.next = 26;break;case 24:_context.prev = 24;_context.t1 = _context["catch"](18);case 26:case "end":return _context.stop();}}}, _callee, null, [[2, 14], [18, 24]]);}))();
+                paydata.data, nonceStr = _paydata$data.nonceStr, paySign = _paydata$data.paySign, signType = _paydata$data.signType, timeStamp = _paydata$data.timeStamp;_context.next = 23;return (
+                  _this.wxPay({ nonceStr: nonceStr, paySign: paySign, signType: signType, timeStamp: timeStamp, package: paydata.data.package }));case 23:_context.next = 29;break;case 25:_context.prev = 25;_context.t1 = _context["catch"](19);
+
+                new _this.$Toast('支付失败', 'none').showtoast();
+                wx.redirectTo({
+                  url: '../personal/personal?index=' + 0 });case 29:
 
 
+                // 3.查询订单是否支付成功
+                chaxunPay = {
+                  appid: 'wx6c4c8e3f1734291d',
+                  mchid: '1621643640',
+                  partnerKey: '58d87cef6d69ffbe6f9120dingyujian',
+                  outno: _this.outno,
+                  id: _this.ide };_context.prev = 30;_context.next = 33;return (
+
+
+                  new _this.Request(_this.Urls.m().queryorder, chaxunPay).modepost());case 33:querydata = _context.sent;
+                if (querydata.msg == 'SUCCESS') {
+                  new _this.$Toast('支付成功').showtoast();
+                  wx.redirectTo({
+                    url: '../personal/personal?index=' + 1 });
+
+                }_context.next = 40;break;case 37:_context.prev = 37;_context.t2 = _context["catch"](30);
+
+                new _this.$Toast(_context.t2, 'none').showtoast();case 40:case "end":return _context.stop();}}}, _callee, null, [[3, 15], [19, 25], [30, 37]]);}))();
 
     },
     // 调用支付；promise
@@ -262,7 +285,6 @@ var Price = __webpack_require__(/*! e-commerce_price */ 227);var _default =
         wx.requestPayment(_objectSpread(_objectSpread({},
         payment), {}, {
           success: function success(res) {
-            console.log(res);
             resolve(res);
           },
           fail: function fail(Error) {
