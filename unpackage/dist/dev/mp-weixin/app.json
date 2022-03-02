@@ -10,7 +10,8 @@
     "pages/payment-page/payment",
     "pages/my-address/my-address",
     "pages/my-address/new-address",
-    "pages/personal/personal"
+    "pages/personal/personal",
+    "pages/order-details/order"
   ],
   "subPackages": [],
   "window": {
