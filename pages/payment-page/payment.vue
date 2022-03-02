@@ -67,6 +67,15 @@
                 ide: ''
             }
         },
+        
+        methods:{
+            // 选择收货地址
+            shAddress(){
+            	uni.navigateTo({
+            		url:'../my-address/my-address'
+            	})
+            },
+        },
 
         onLoad(e) {
             this.comminfo = JSON.parse(e.cartdata)

@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -200,6 +200,15 @@ var Price = __webpack_require__(/*! e-commerce_price */ 227);var _default =
 
   },
 
+  methods: {
+    // 选择收货地址
+    shAddress: function shAddress() {
+      uni.navigateTo({
+        url: '../my-address/my-address' });
+
+    } },
+
+
   onLoad: function onLoad(e) {
     this.comminfo = JSON.parse(e.cartdata);
     // 合计支付总价计算
@@ -213,6 +222,7 @@ var Price = __webpack_require__(/*! e-commerce_price */ 227);var _default =
     var _id = JSON.parse(e.cartdata).filter(function (item) {return item._id;});
     this.idcard = _id.map(function (item) {return item._id;});
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
