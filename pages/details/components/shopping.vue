@@ -49,7 +49,6 @@
                     let enshrine = await new this.Request(this.Urls.m().enshrine,data).modepost()
                     let {errcode} = enshrine.msg
                     if(errcode == '401'){
-                        console.log('需登录')
                         // 没有权限，需要登录
                         this.$refs.show.showing('coll')
                     }else if(errcode == '200'){
