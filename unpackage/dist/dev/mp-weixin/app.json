@@ -6,7 +6,8 @@
     "pages/my/my",
     "pages/details/details",
     "pages/comments/comments",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/payment-page/payment"
   ],
   "subPackages": [],
   "window": {
