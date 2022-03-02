@@ -221,7 +221,22 @@ var Price = __webpack_require__(/*! e-commerce_price */ 227);var _default =
     // filter:过滤，筛选
     var _id = JSON.parse(e.cartdata).filter(function (item) {return item._id;});
     this.idcard = _id.map(function (item) {return item._id;});
-  } };exports.default = _default;
+  },
+  // 接收vuex的收货地址数据
+  watch: {
+    "$store.state.addordr": function $storeStateAddordr(newval, olval) {
+      this.address = newval.address;
+    } },
+
+  computed: {
+    // 是否选择了收货地址
+    nameadd: function nameadd() {
+      if (JSON.stringify(this.address) === "{}") {
+        return false;
+      } else {
+        return true;
+      }
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

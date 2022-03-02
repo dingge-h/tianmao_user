@@ -6,13 +6,13 @@
                 <view class="payment-left-img">
                     <image src="/static/loading/address-shouhuo.svg" mode="widthFix"></image>
                 </view>
-             	  <!-- 收货地址 -->
-              	 <!-- <view class="payment-add" v-if="nameadd">
+             	<!-- 收货地址 -->
+              	<view class="payment-add" v-if="nameadd">
             		<text>{{address.name}}</text>
             		<text>{{address.mobile}}</text>
             		<text>{{address.city}}{{address.address}}</text>
-            	</view> -->
-                <view class="payment-add">请选择收货地址</view>
+            	</view>
+                <view class="payment-add" v-if="!nameadd">请选择收货地址</view>
                 <view class="payment-right-img">
                     <image src="/static/loading/shouhuo-jiantou.svg" mode="widthFix"></image>
                 </view>
@@ -90,6 +90,22 @@
             let _id = JSON.parse(e.cartdata).filter(item=>item._id)
             this.idcard = _id.map(item=>item._id)
         },
+        // 接收vuex的收货地址数据
+        watch:{
+        	"$store.state.addordr"(newval,olval){
+        		this.address = newval.address
+        	}
+        },
+        computed:{
+        	// 是否选择了收货地址
+        	nameadd(){
+        		if(JSON.stringify(this.address) === "{}"){
+        			return false
+        		}else{
+        			return true
+        		}
+        	}
+        }
     }
 </script>
 
