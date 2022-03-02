@@ -187,6 +187,11 @@ console,log = _console.log;var _default =
 
 
 
+    },
+
+    // 调用父组件里的sku组件
+    couponsFun: function couponsFun(mean) {
+      this.$parent.shoPp(mean);
     } },
 
 

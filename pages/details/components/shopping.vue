@@ -71,6 +71,11 @@
                 }catch(e){
                     //TODO handle the exception
                 }
+            },
+            
+            // 调用父组件里的sku组件
+            couponsFun(mean){
+            	this.$parent.shoPp(mean)
             }
         },
         

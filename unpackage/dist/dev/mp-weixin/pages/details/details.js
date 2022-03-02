@@ -353,6 +353,11 @@ var _require = __webpack_require__(/*! ../../public/logic.js */ 57),Login = _req
       });
     },
 
+    // 被子组件shopping调用
+    shoPp: function shoPp(mean) {
+      this.$refs.addto.showCou(mean);
+    },
+
     // 返回上一页面
     pageRe: function pageRe() {
       uni.navigateBack({

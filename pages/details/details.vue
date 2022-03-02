@@ -220,6 +220,11 @@
             		});
             	})
             },
+            
+            // 被子组件shopping调用
+            shoPp(mean){
+            	this.$refs.addto.showCou(mean)
+            },
 
             // 返回上一页面
             pageRe() {
