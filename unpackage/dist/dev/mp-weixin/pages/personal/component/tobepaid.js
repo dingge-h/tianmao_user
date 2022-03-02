@@ -123,7 +123,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 28));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 28));
 
 
 
@@ -189,7 +189,16 @@ __webpack_require__(/*! ../../../style/order.css */ 278);function _interopRequir
 
 
 
+    },
+    // 订单详情页
+    payDetail: function payDetail(id) {
+      var tip = { tips: '等待买家付款', sum: '需付款', show: true, text: '付款', id: id };
+      var value = JSON.stringify(tip);
+      uni.navigateTo({
+        url: '../order-details/order?value=' + value });
+
     } },
+
 
 
   created: function created() {
@@ -203,6 +212,7 @@ __webpack_require__(/*! ../../../style/order.css */ 278);function _interopRequir
       }
     });
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

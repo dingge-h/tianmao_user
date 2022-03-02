@@ -65,6 +65,15 @@
             		//TODO handle the exception
             	}
             },
+            // 订单详情页
+            payDetail(id){
+            	let tip = {tips:'等待买家付款',sum:'需付款',show:true,text:'付款',id}
+            	let value = JSON.stringify(tip)
+            	uni.navigateTo({
+            		url:'../order-details/order?value=' + value
+            	})
+            },
+            
         },
         
         created() {

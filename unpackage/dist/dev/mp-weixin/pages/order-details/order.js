@@ -95,6 +95,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.orderdata, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var m0 = parseFloat(item.total_price.toFixed(10))
+    return {
+      $orig: $orig,
+      m0: m0
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -125,12 +143,101 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!D:/天猫小程序/tianmao/pages/order-details/order.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-//
-//
-//
-//
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 28));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+__webpack_require__(/*! ../../style/order.css */ 278);
+__webpack_require__(/*! ../../style/order-details.css */ 286);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+{
+  data: function data() {
+    return {
+      values: {},
+      orderdata: [] };
+
+  },
+  methods: {
+    tobeDetail: function tobeDetail(id) {var _arguments = arguments,_this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var evt, data, _data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:evt = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : '001';if (!(
+                evt == '001')) {_context.next = 13;break;}_context.prev = 2;_context.next = 5;return (
+
+                  new _this.Request(_this.Urls.m().tobedetail + '?id=' + id).modeget());case 5:data = _context.sent;
+                _this.orderdata = data.data;_context.next = 11;break;case 9:_context.prev = 9;_context.t0 = _context["catch"](2);case 11:_context.next = 22;break;case 13:_context.prev = 13;_context.next = 16;return (
+
+
+
+
+
+                  new _this.Request(_this.Urls.m().dtpepage + '?id=' + id).modeget());case 16:_data = _context.sent;
+                _this.orderdata = _data.data;_context.next = 22;break;case 20:_context.prev = 20;_context.t1 = _context["catch"](13);case 22:case "end":return _context.stop();}}}, _callee, null, [[2, 9], [13, 20]]);}))();
+
+
+
+
+    } },
+
+
+  onLoad: function onLoad(e) {
+    var value = JSON.parse(e.value);
+    this.values = value;
+    this.tobeDetail(value.id, value.evt);
+  } };exports.default = _default;
 
 /***/ })
 
